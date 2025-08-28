@@ -34,7 +34,7 @@ function search_user(){
     result_div.id = "search_results_element";
     result_div.className = "search_results";
     for(let i = 0; i < num_entries(map[search_term]); i++){
-        result_div.appendChild(create_search_result(map[search_term], i));
+        result_div.appendChild(create_search_result(map, search_term, i));
     }
     let last_check = document.getElementById("search_results_element");
     if(last_check !== null){
@@ -44,8 +44,21 @@ function search_user(){
     
 }
 
-function create_search_result(category, index){
-    let info_list = category[index];
+function create_search_result(map, category, index){
+    let info_list = null;
+
+    console.log("Search");
+    console.log(category);
+
+    if(category != "country"){
+        info_list = map[category][index];
+    }
+    else{
+        console.log(category[index]);
+        info_list = map[category][index].cities[0];
+    }
+
+
 
     let result = document.createElement('div');
     result.className = "search_results_result";
